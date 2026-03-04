@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="de" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Dictionaries Quiz</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&amp;family=Lexend:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    
+    .font-display { font-family: 'Lexend', sans-serif; }
+    .font-mono { font-family: 'Fira Code', monospace; }
+    
+    .answer-card {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .answer-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+    
+    .answer-card:hover:not(.selected):not(.disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+    
+    .answer-card:hover::before {
+      left: 100%;
+    }
+    
+    .answer-card.selected {
+      border-color: #3b82f6;
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+      transform: scale(1.02);
+    }
+    
+    .answer-card.correct {
+      border-color: #22c55e;
+      background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+      animation: pulse-correct 0.5s ease;
+    }
+    
+    .answer-card.incorrect {
+      border-color: #ef4444;
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+      animation: shake 0.5s ease;
+    }
+    
+    .answer-card.disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    
+    @keyframes pulse-correct {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+    
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .fade-in-up {
+      animation: fadeInUp 0.4s ease forwards;
+    }
+    
+    .code-box {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border-left: 4px solid #06b6d4;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .progress-ring {
+      transition: stroke-dashoffset 0.5s ease;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+    
+    .btn-check {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+    
+    .btn-check:hover:not(:disabled) {
+      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
+      transform: translateY(-2px);
+    }
+    
+    .btn-check:disabled {
+      background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+    
+    .answer-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.25s;
+    }
+    
+    .answer-card:not(.disabled):hover .answer-label {
+      transform: scale(1.1);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-display">
+  <div id="app-container" class="h-full w-full overflow-auto bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900">
+   <div class="max-w-4xl mx-auto px-4 py-10"><!-- Header -->
+    <header class="text-center mb-10 fade-in-up">
+     <div class="inline-flex items-center gap-2 bg-cyan-400/20 backdrop-blur-sm border border-cyan-400/30 px-4 py-2 rounded-full mb-4"><span class="text-2xl">🐍</span> <span class="text-cyan-300 font-semibold text-sm tracking-wide">PYTHON MASTERY</span>
+     </div>
+     <h1 id="main-title" class="text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">Python Dictionaries Quiz</h1>
+     <p id="main-description" class="text-blue-200 text-lg max-w-2xl mx-auto">Teste dein Wissen über Dictionary-Grundlagen</p>
+    </header><!-- Progress Card -->
+    <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 mb-8 fade-in-up" style="animation-delay: 0.1s">
+     <div class="flex items-center justify-between mb-4">
+      <div>
+       <div class="text-white/70 text-sm font-medium mb-1">
+        Fortschritt
+       </div>
+       <div class="text-white text-2xl font-bold"><span id="answered-count">0</span><span class="text-white/50">/10</span>
+       </div>
+      </div>
+      <div class="relative">
+       <svg width="80" height="80" class="transform -rotate-90"><circle cx="40" cy="40" r="35" stroke="rgba(255,255,255,0.2)" stroke-width="6" fill="none" /> <circle id="progress-circle" cx="40" cy="40" r="35" stroke="#06b6d4" stroke-width="6" fill="none" stroke-dasharray="220" stroke-dashoffset="220" stroke-linecap="round" />
+       </svg>
+       <div class="absolute inset-0 flex items-center justify-center"><span id="progress-percent" class="text-white font-bold text-lg">0%</span>
+       </div>
+      </div>
+     </div>
+     <div id="score-section" class="hidden pt-4 border-t border-white/20">
+      <div class="flex items-center justify-between"><span class="text-white/70 font-medium">Punktestand:</span> <span class="text-emerald-400 text-xl font-bold"> <span id="correct-count">0</span> / 10 ✓ </span>
+      </div>
+     </div>
+    </div><!-- Questions -->
+    <div id="questions-container" class="space-y-6"><!-- Questions will be rendered here -->
+    </div><!-- Reset Button -->
+    <div class="text-center mt-10 fade-in-up" style="animation-delay: 0.2s"><button onclick="resetQuiz()" class="bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105"> 🔄 Quiz neu starten </button>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      quiz_title: "Python Dictionaries Quiz",
+      description_text: "Teste dein Wissen über Dictionary-Grundlagen"
+    };
+
+    const quizData = [
+      {
+        id: 1,
+        category: "Erstellen",
+        question: "Was erstellt dieser Code?",
+        code: 'mein_dict = {"name": "Lisa", "alter": 28}',
+        options: [
+          "Eine Liste mit zwei Elementen",
+          "Ein Dictionary mit zwei Schlüssel-Wert-Paaren",
+          "Ein Tuple mit Strings",
+          "Einen Fehler"
+        ],
+        correctIndex: 1,
+        explanation: "Die geschweiften Klammern {} mit Schlüssel-Wert-Paaren (getrennt durch Doppelpunkt) erstellen ein Dictionary. 'name' und 'alter' sind die Schlüssel."
+      },
+      {
+        id: 2,
+        category: "Erstellen",
+        question: "Welcher Code erstellt ein leeres Dictionary?",
+        code: null,
+        options: [
+          "dictionary = ()",
+          "dictionary = {}",
+          "dictionary = []",
+          "dictionary = <>"
+        ],
+        correctIndex: 1,
+        explanation: "Leere geschweifte Klammern {} erstellen ein leeres Dictionary. () erstellt ein Tuple und [] eine Liste."
+      },
+      {
+        id: 3,
+        category: "Zugriff",
+        question: "Was gibt dieser Code aus?",
+        code: 'person = {"vorname": "Max", "nachname": "Müller"}\nprint(person["vorname"])',
+        options: [
+          "{'vorname': 'Max'}",
+          "vorname",
+          "Max",
+          "KeyError"
+        ],
+        correctIndex: 2,
+        explanation: "Mit person['vorname'] greift man auf den Wert des Schlüssels 'vorname' zu, also den String 'Max'."
+      },
+      {
+        id: 4,
+        category: "Zugriff",
+        question: "Was ist das Ergebnis?",
+        code: 'zahlen = {"eins": 1, "zwei": 2, "drei": 3}\nergebnis = zahlen["zwei"]',
+        options: [
+          "ergebnis ist 2",
+          "ergebnis ist 'zwei'",
+          "ergebnis ist {'zwei': 2}",
+          "Fehler"
+        ],
+        correctIndex: 0,
+        explanation: "zahlen['zwei'] gibt den Wert zurück, der zum Schlüssel 'zwei' gehört. Das ist die Zahl 2."
+      },
+      {
+        id: 5,
+        category: "Zugriff",
+        question: "Was passiert hier?",
+        code: 'auto = {"marke": "BMW", "farbe": "blau"}\nprint(auto["modell"])',
+        options: [
+          "Gibt None aus",
+          "Gibt 'modell' aus",
+          "KeyError wird ausgelöst",
+          "Gibt ein leeres Dictionary aus"
+        ],
+        correctIndex: 2,
+        explanation: "Der Schlüssel 'modell' existiert nicht im Dictionary. Beim Zugriff mit eckigen Klammern [] auf einen nicht existierenden Schlüssel entsteht ein KeyError."
+      },
+      {
+        id: 6,
+        category: "Update",
+        question: "Was enthält das Dictionary danach?",
+        code: 'daten = {"a": 10}\ndaten["b"] = 20',
+        options: [
+          "{'a': 10}",
+          "{'b': 20}",
+          "{'a': 10, 'b': 20}",
+          "Fehler"
+        ],
+        correctIndex: 2,
+        explanation: "Mit daten['b'] = 20 wird ein neues Schlüssel-Wert-Paar hinzugefügt. Das Dictionary enthält nun beide Einträge: 'a' und 'b'."
+      },
+      {
+        id: 7,
+        category: "Update",
+        question: "Was ist der Wert von x am Ende?",
+        code: 'werte = {"x": 5, "y": 10}\nwerte["x"] = 15\nprint(werte["x"])',
+        options: [
+          "5",
+          "15",
+          "{'x': 15}",
+          "Beide Werte 5 und 15"
+        ],
+        correctIndex: 1,
+        explanation: "Wenn man einem existierenden Schlüssel einen neuen Wert zuweist (werte['x'] = 15), wird der alte Wert überschrieben. Der neue Wert ist 15."
+      },
+      {
+        id: 8,
+        category: "Update",
+        question: "Wie viele Einträge hat das Dictionary?",
+        code: 'dinge = {}\ndinge["apfel"] = "rot"\ndinge["banane"] = "gelb"\ndinge["apfel"] = "grün"',
+        options: [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        correctIndex: 1,
+        explanation: "Es gibt nur 2 Einträge: 'apfel' und 'banane'. Der Schlüssel 'apfel' wird beim dritten Zugriff nur überschrieben (von 'rot' zu 'grün'), nicht neu hinzugefügt."
+      },
+      {
+        id: 9,
+        category: "Vergleich",
+        question: "Was gibt dieser Vergleich zurück?",
+        code: 'preise = {"brot": 2, "milch": 1, "käse": 4}\nprint(preise["brot"] > preise["milch"])',
+        options: [
+          "True",
+          "False",
+          "TypeError",
+          "None"
+        ],
+        correctIndex: 0,
+        explanation: "preise['brot'] ist 2 und preise['milch'] ist 1. Der Vergleich 2 > 1 ist True. Man kann die Werte aus Dictionaries direkt vergleichen."
+      },
+      {
+        id: 10,
+        category: "Vergleich",
+        question: "Was ist das Ergebnis?",
+        code: 'temp = {"montag": 20, "dienstag": 18, "mittwoch": 22}\nif temp["montag"] == temp["dienstag"]:\n    print("gleich")\nelse:\n    print("unterschiedlich")',
+        options: [
+          "gleich",
+          "unterschiedlich",
+          "None",
+          "Fehler"
+        ],
+        correctIndex: 1,
+        explanation: "temp['montag'] ist 20 und temp['dienstag'] ist 18. Da 20 ≠ 18, ist die Bedingung False und der else-Block wird ausgeführt: 'unterschiedlich'."
+      }
+    ];
+
+    let userAnswers = {};
+    let checkedQuestions = {};
+
+    function renderQuestions() {
+      const container = document.getElementById('questions-container');
+      container.innerHTML = quizData.map((q, index) => `
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 fade-in-up" 
+             style="animation-delay: ${0.1 + index * 0.05}s">
+          
+          <div class="flex items-center gap-3 mb-4">
+            <span class="bg-cyan-500/30 border border-cyan-400/50 text-cyan-300 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider">
+              ${q.category}
+            </span>
+            <span class="text-white/50 text-sm font-medium">Frage ${q.id}</span>
+          </div>
+
+          <h3 class="text-white text-xl font-semibold mb-4 leading-relaxed">
+            ${q.question}
+          </h3>
+
+          ${q.code ? `
+            <div class="code-box rounded-xl p-5 mb-6">
+              <pre class="font-mono text-emerald-300 text-sm leading-relaxed overflow-x-auto">${escapeHtml(q.code)}</pre>
+            </div>
+          ` : ''}
+
+          <div class="space-y-3 mb-5" id="options-container-${q.id}">
+            ${q.options.map((option, optIdx) => {
+              const letters = ['A', 'B', 'C', 'D'];
+              return `
+                <div class="answer-card bg-white/5 border-2 border-white/20 rounded-xl p-4 
+                            ${userAnswers[q.id] === optIdx ? 'selected' : ''}" 
+                     onclick="selectAnswer(${q.id}, ${optIdx})"
+                     data-question="${q.id}" data-option="${optIdx}">
+                  <div class="flex items-center gap-4">
+                    <span class="answer-label bg-white/20 text-white flex-shrink-0">
+                      ${letters[optIdx]}
+                    </span>
+                    <span class="text-white/90 font-mono text-sm flex-1">${escapeHtml(option)}</span>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <div class="flex items-center gap-4">
+            <button onclick="checkAnswer(${q.id})" 
+                    id="check-btn-${q.id}"
+                    class="btn-check text-white font-bold px-6 py-3 rounded-xl transition-all duration-300"
+                    ${userAnswers[q.id] === undefined || checkedQuestions[q.id] ? 'disabled' : ''}>
+              Überprüfen
+            </button>
+            <span id="result-${q.id}" class="font-semibold text-lg"></span>
+          </div>
+
+          <div id="explanation-${q.id}" class="hidden mt-5 bg-amber-500/20 border border-amber-400/50 rounded-xl p-5">
+            <div class="flex items-start gap-3">
+              <span class="text-2xl flex-shrink-0">💡</span>
+              <div class="text-amber-100 text-sm leading-relaxed">${q.explanation}</div>
+            </div>
+          </div>
+
+        </div>
+      `).join('');
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function selectAnswer(questionId, optionIndex) {
+      if (checkedQuestions[questionId]) return;
+
+      userAnswers[questionId] = optionIndex;
+
+      const container = document.getElementById(`options-container-${questionId}`);
+      const cards = container.querySelectorAll('.answer-card');
+      
+      cards.forEach((card, idx) => {
+        card.classList.remove('selected');
+        if (idx === optionIndex) {
+          card.classList.add('selected');
+        }
+      });
+
+      document.getElementById(`check-btn-${questionId}`).disabled = false;
+    }
+
+    function checkAnswer(questionId) {
+      const question = quizData.find(q => q.id === questionId);
+      const userAnswer = userAnswers[questionId];
+      const isCorrect = userAnswer === question.correctIndex;
+
+      checkedQuestions[questionId] = true;
+
+      const container = document.getElementById(`options-container-${questionId}`);
+      const cards = container.querySelectorAll('.answer-card');
+
+      cards.forEach((card, idx) => {
+        card.classList.add('disabled');
+        card.onclick = null;
+
+        if (idx === question.correctIndex) {
+          card.classList.add('correct');
+        } else if (idx === userAnswer && !isCorrect) {
+          card.classList.add('incorrect');
+        }
+      });
+
+      const resultEl = document.getElementById(`result-${questionId}`);
+      if (isCorrect) {
+        resultEl.innerHTML = '<span class="text-emerald-400">✓ Richtig!</span>';
+      } else {
+        resultEl.innerHTML = '<span class="text-red-400">✗ Falsch</span>';
+      }
+
+      document.getElementById(`explanation-${questionId}`).classList.remove('hidden');
+      document.getElementById(`check-btn-${questionId}`).disabled = true;
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const totalQuestions = quizData.length;
+      const answeredCount = Object.keys(checkedQuestions).length;
+      const correctCount = Object.keys(checkedQuestions).filter(qId => {
+        const q = quizData.find(question => question.id === parseInt(qId));
+        return userAnswers[qId] === q.correctIndex;
+      }).length;
+
+      const progressPercent = Math.round((answeredCount / totalQuestions) * 100);
+      const circumference = 220;
+      const offset = circumference - (progressPercent / 100) * circumference;
+
+      document.getElementById('answered-count').textContent = answeredCount;
+      document.getElementById('progress-percent').textContent = progressPercent + '%';
+      document.getElementById('progress-circle').style.strokeDashoffset = offset;
+
+      if (answeredCount > 0) {
+        document.getElementById('score-section').classList.remove('hidden');
+        document.getElementById('correct-count').textContent = correctCount;
+      }
+    }
+
+    function resetQuiz() {
+      userAnswers = {};
+      checkedQuestions = {};
+      renderQuestions();
+      updateProgress();
+      document.getElementById('score-section').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    async function onConfigChange(config) {
+      const title = config.quiz_title || defaultConfig.quiz_title;
+      const description = config.description_text || defaultConfig.description_text;
+      
+      document.getElementById('main-title').textContent = title;
+      document.getElementById('main-description').textContent = description;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["quiz_title", config.quiz_title || defaultConfig.quiz_title],
+        ["description_text", config.description_text || defaultConfig.description_text]
+      ]);
+    }
+
+    // Initialize
+    renderQuestions();
+    
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d709182b526e5d9',t:'MTc3MjYyNDAzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
