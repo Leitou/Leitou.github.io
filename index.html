@@ -1,63 +1,687 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles-common.css">
-    <link rel="stylesheet" href="styles-index.css">
-    <title>Haie</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyLingo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    #code-editor {
+      min-height: 24rem;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.875rem;
+      background: #111827;
+      color: #4ade80;
+      border: none;
+      outline: none;
+      resize: none;
+      width: 100%;
+      padding: 1rem;
+      box-sizing: border-box;
+    }
+    #code-editor::placeholder { color: #6b7280; }
+  </style>
 </head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
 
-<body>
-    
-    
-    
-    <div class="navbar">
-        <a href="hammerhead.html">Hammerhai</a>
-        <a href="whaleshark.html">Walhai</a>
-        <a href="species_protection.html">Artenschutz</a>
-    </div>
-    
-    <div  class="index-title clearfix">
-        <img class="idx-title-img" src="images/Scalloped_hammerhead_at_Burgers'_Zoo.jpg" alt="Hammerhead">
-        <h1 class="idx-title-overlap">Haie</h1>
-    </div>
-    
-    
-    <p id="initscroll" class="index-content">
-        Haie (Selachii, Syn.: Selachimorpha, Selachoidei, Pleurotremata) sind Fische aus der Klasse der Knorpelfische. Es sind weltweit über 500 Arten bekannt. Das Wort Hai stammt vom niederländischen haai ab. Dieses wiederum kommt vom isländischen Wort haki, das Haken bedeutet und eine Anlehnung an die hakenförmige Schwanzflosse der Haie ist. Umgangssprachlich werden die Haie oft Haifische genannt.
-        Die meisten Haie fressen Fische und andere größere Meerestiere; die zwei größten Haiarten, der bis zu 14 m lange und 12 t schwere Walhai, und der Riesenhai sowie der Riesenmaulhai ernähren sich im Wesentlichen von Plankton. Obwohl jährlich nur etwa fünf Menschen infolge von Haiangriffen sterben, gelten die Tiere gemeinhin als kaltblütige Killer und Menschenfresser. Viele Haiarten sind durch übermäßige Befischung in ihrem Bestand bedroht.
-    </p>
-    
-    <p class="index-content">
-        Haie stellen eine Gruppe von über 500 Arten dar, die sich in ihrer Größe und ihrem Aussehen teilweise erheblich unterscheiden. Als kleinste bekannte Arten der Haie gelten der Zwerg-Laternenhai (Etmopterus perryi) und der Zylindrische Laternenhai (E. carteri) mit nur 16 bis 20 Zentimetern Körperlänge und einem Gewicht von etwa 150 Gramm. Als größte Arten stehen diesen der bis zu 14 Meter lange und 12 Tonnen schwere Walhai (Rhincodon typus) und der bis zu 10 Meter lange Riesenhai (Cetorhinus maximus) gegenüber, die sich beide fast ausschließlich von Plankton ernähren. Unter den fleischfressenden und jagenden Arten stellt der Weiße Hai (Carcharodon carcharias) mit einer Maximallänge von bis zu 7 Metern die größte Art dar, während der ausgestorbene Riesenhai Megalodon (Otodus megalodon) wahrscheinlich eine Gesamtlänge von 14 bis maximal 20 Meter erreichte. Etwa die Hälfte aller Haiarten erreicht eine Körperlänge von etwa einem Meter, bei 20 Prozent aller Arten liegt diese über 2 Meter.
-    </p>
-    
-    <p class="index-content">
-        <img src="images/merkmale.png" alt="Merkmale" width="100%">
-    </p>
-    
-    <p class="index-content">
-        Der Rumpfbereich beginnt mit den paarigen Brustflossen, die in der Regel im Bereich oder hinter der letzten Kiemenspalte ansetzen. An der Bauchseite folgen diesen die ebenfalls paarigen Bauchflossen, die bei den Männchen mit den paarigen Klaspern, den Kopulationsorganen der Haie, verbunden sind. Auf der Rückenseite befinden sich in der Regel zwei hintereinanderliegende und unpaare Rückenflossen, bei denen häufig (vor allem bei den danach benannten Dornhaien) jeweils ein Rückenflossendorn ausgebildet ist. Bei den meisten Haiarten ist die erste Rückenflosse deutlich größer als die zweite, die meistens im Bereich des Schwanzstiels liegt und bei einzelnen Arten auch fehlen kann. Auf der Bauchseite des Schwanzstiels befindet sich zudem sehr häufig eine unpaare Afterflosse. Schnellschwimmende Haiarten haben zudem seitlich ausgebildete Kiele am Schwanzstiel.
-        <br>
-        Die Schwanzflosse besteht aus einem oberen und einem unteren Flossenlappen (Lobi), wobei der untere Lobus häufig deutlich kleiner ist als der obere. Dies ist insbesondere bei bodenlebenden Arten wie den Katzenhaien, aber auch bei vielen Arten des Freiwassers, etwa Hammerhaien oder vor allem den Fuchshaien, der Fall. Letztere besitzen einen deutlich verlängerten oberen Schwanzlobus, der bei der Jagd eingesetzt wird. Bei schnellschwimmenden Arten wie den Makohaien oder dem Weißen Hai ist der Schwanz dagegen fast symmetrisch.
-    </p>
-    
-    
-    
-    <div class="footer">
-        <p>Footer</p>
-    </div>
-    
-    
-    
-    <!--Kann ignoriert werden-->
-    <script>
-        var element_to_scroll_to = document.getElementById('initscroll');
-        /*element_to_scroll_to.scrollIntoView({behavior: "smooth"})*/
-    </script>
-    
-    
+<!-- SVG Icons (inline) -->
+<svg style="display:none">
+  <symbol id="icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+  </symbol>
+  <symbol id="icon-rotate-ccw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="1 4 1 10 7 10"></polyline>
+    <path d="M3.51 15a9 9 0 1 0 .49-3.51"></path>
+  </symbol>
+  <symbol id="icon-lightbulb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="9" y1="18" x2="15" y2="18"></line><line x1="10" y1="22" x2="14" y2="22"></line>
+    <path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path>
+  </symbol>
+  <symbol id="icon-check-circle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>
+  </symbol>
+  <symbol id="icon-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+  </symbol>
+  <symbol id="icon-trophy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="8 17 12 21 16 17"></polyline><line x1="12" y1="12" x2="12" y2="21"></line>
+    <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"></path>
+  </symbol>
+  <symbol id="icon-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"></path>
+  </symbol>
+</svg>
+
+<script>
+// ─── Translations ───────────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  "en-US": {
+    "helloWorldTitle": "Hello World",
+    "helloWorldDescription": "Welcome to Python! Let's start with the traditional first program.",
+    "helloWorldTask": "Write a program that prints 'Hello, World!' to the console.",
+    "helloWorldHint": "Use the print() function with the text in quotes: print('Hello, World!')",
+    "variablesNumbersTitle": "Variables and Numbers",
+    "variablesNumbersDescription": "Learn to store and work with numbers using variables.",
+    "variablesNumbersTask": "Create a variable called 'age' with value 25, then print it.",
+    "variablesNumbersHint": "Create a variable: age = 25, then print it: print(age)",
+    "stringVariablesTitle": "String Variables",
+    "stringVariablesDescription": "Work with text data using string variables.",
+    "stringVariablesTask": "Create a variable called 'name' with your name, then print 'Hello, [name]!'",
+    "stringVariablesHint": "Use string concatenation or f-strings: print(f'Hello, {name}!')",
+    "userInputTitle": "User Input",
+    "userInputDescription": "Learn to get input from users and respond.",
+    "userInputTask": "Ask for the user's favorite color and print 'Your favorite color is [color]'",
+    "userInputHint": "Use input() to get user input: color = input('What is your favorite color? ')",
+    "basicMathTitle": "Basic Math",
+    "basicMathDescription": "Perform mathematical operations in Python.",
+    "basicMathTask": "Calculate 15 + 27 and print the result.",
+    "basicMathHint": "Use the + operator: print(15 + 27)",
+    "conditionalsTitle": "Conditionals",
+    "conditionalsDescription": "Make decisions in your code with if statements.",
+    "conditionalsTask": "Check if the number 10 is greater than 5. If true, print 'Yes, 10 is greater than 5'",
+    "conditionalsHint": "Use if statement: if number > 5: print('Yes, 10 is greater than 5')",
+    "forLoopsTitle": "For Loops",
+    "forLoopsDescription": "Repeat actions using for loops.",
+    "forLoopsTask": "Print numbers from 1 to 3 using a for loop.",
+    "forLoopsHint": "Use range(): for i in range(1, 4): print(i)",
+    "whileLoopsTitle": "While Loops",
+    "whileLoopsDescription": "Use while loops for conditional repetition.",
+    "whileLoopsTask": "Print numbers from 1 to 3 using a while loop.",
+    "whileLoopsHint": "Increment count each iteration: while count <= 3: print(count); count += 1",
+    "listsBasicsTitle": "Lists Basics",
+    "listsBasicsDescription": "Store multiple items in lists.",
+    "listsBasicsTask": "Create a list with fruits ['apple', 'banana', 'orange'] and print the second item.",
+    "listsBasicsHint": "Lists use zero-based indexing: fruits[1] gets the second item",
+    "listOperationsTitle": "List Operations",
+    "listOperationsDescription": "Add and modify list items.",
+    "listOperationsTask": "Create a list [1, 2, 3], add the number 4, then print the entire list.",
+    "listOperationsHint": "Use append() method: numbers.append(4), then print(numbers)",
+    "functionsBasicsTitle": "Functions Basics",
+    "functionsBasicsDescription": "Create reusable code with functions.",
+    "functionsBasicsTask": "Define a function called 'greet' that prints 'Hello!' and then call it.",
+    "functionsBasicsHint": "Use def keyword: def greet(): print('Hello!'), then call greet()",
+    "functionsParametersTitle": "Functions with Parameters",
+    "functionsParametersDescription": "Pass data to functions using parameters.",
+    "functionsParametersTask": "Create a function 'say_hello' that takes a name parameter and prints 'Hello, [name]!'. Call it with 'World'.",
+    "functionsParametersHint": "def say_hello(name): print(f'Hello, {name}!'), then call say_hello('World')",
+    "dictionariesTitle": "Dictionaries",
+    "dictionariesDescription": "Store key-value pairs using dictionaries.",
+    "dictionariesTask": "Create a dictionary with person info: name='Alice', age=30. Print the name.",
+    "dictionariesHint": "Use curly braces: person = {'name': 'Alice', 'age': 30}, access with person['name']",
+    "stringMethodsTitle": "String Methods",
+    "stringMethodsDescription": "Manipulate strings with built-in methods.",
+    "stringMethodsTask": "Take the string 'python programming' and print it in uppercase.",
+    "stringMethodsHint": "Use the upper() method: text.upper()",
+    "finalChallengeTitle": "Final Challenge",
+    "finalChallengeDescription": "Combine everything you've learned!",
+    "finalChallengeTask": "Create a list of numbers [1,2,3,4,5], use a for loop to print each number multiplied by 2.",
+    "finalChallengeHint": "Loop through the list: for num in numbers: print(num * 2)",
+    "starterCodeComment": "# Write your code here\n",
+    "createVariableComment": "# Create a variable and print it\n",
+    "createStringComment": "# Create a string variable\n",
+    "getUserInputComment": "# Get user input and respond\n",
+    "calculateSumComment": "# Calculate and print the sum\n",
+    "useIfStatementComment": "# Use an if statement\nnumber = 10\n",
+    "useForLoopComment": "# Use a for loop to print numbers\n",
+    "useWhileLoopComment": "# Use a while loop\ncount = 1\n",
+    "createListComment": "# Create a list and access items\n",
+    "createListAddComment": "# Create list and add item\n",
+    "defineFunctionComment": "# Define and call a function\n",
+    "functionParameterComment": "# Function with parameter\n",
+    "createDictionaryComment": "# Create and use a dictionary\n",
+    "stringMethodsComment": "# Use string methods\ntext = 'python programming'\n",
+    "finalChallengeComment": "# Final challenge - combine concepts\n",
+    "appTitle": "PyLingo",
+    "levelsProgress": "Levels",
+    "streakLabel": "streak",
+    "levelButton": "Level",
+    "overallProgress": "Overall Progress",
+    "selectLevel": "Select Level",
+    "closeButton": "×",
+    "taskLabel": "Task:",
+    "showHint": "Show Hint",
+    "hideHint": "Hide Hint",
+    "pythonCodeEditor": "Python Code Editor",
+    "resetButton": "Reset",
+    "runCodeButton": "Run Code",
+    "codeEditorPlaceholder": "Write your Python code here...",
+    "previousLevel": "Previous Level",
+    "nextLevel": "Next Level",
+    "levelOf": "Level {current} of {total}",
+    "evaluatingCode": "🤔 Evaluating your code...",
+    "excellentComplete": "🎉 Excellent! You completed this level!",
+    "notQuiteRight": "Not quite right. Let's review your solution:",
+    "yourOutput": "Your output:",
+    "expectedOutput": "Expected output:",
+    "tipLabel": "Tip:"
+  },
+  "es-ES": {
+    "helloWorldTitle": "Hola Mundo",
+    "helloWorldDescription": "¡Bienvenido a Python! Comencemos con el programa tradicional.",
+    "helloWorldTask": "Escribe un programa que imprima '¡Hola, Mundo!' en la consola.",
+    "helloWorldHint": "Usa la función print() con el texto entre comillas: print('¡Hola, Mundo!')",
+    "variablesNumbersTitle": "Variables y Números",
+    "variablesNumbersDescription": "Aprende a almacenar y trabajar con números usando variables.",
+    "variablesNumbersTask": "Crea una variable llamada 'edad' con valor 25, luego imprímela.",
+    "variablesNumbersHint": "Crea una variable: edad = 25, luego imprímela: print(edad)",
+    "stringVariablesTitle": "Variables de Cadena",
+    "stringVariablesDescription": "Trabaja con datos de texto usando variables de cadena.",
+    "stringVariablesTask": "Crea una variable llamada 'nombre' con tu nombre, luego imprime '¡Hola, [nombre]!'",
+    "stringVariablesHint": "Usa concatenación de cadenas o f-strings: print(f'¡Hola, {nombre}!')",
+    "userInputTitle": "Entrada del Usuario",
+    "userInputDescription": "Aprende a obtener entrada de los usuarios y responder.",
+    "userInputTask": "Pregunta por el color favorito del usuario e imprime 'Tu color favorito es [color]'",
+    "userInputHint": "Usa input() para obtener entrada del usuario: color = input('¿Cuál es tu color favorito? ')",
+    "basicMathTitle": "Matemáticas Básicas",
+    "basicMathDescription": "Realiza operaciones matemáticas en Python.",
+    "basicMathTask": "Calcula 15 + 27 e imprime el resultado.",
+    "basicMathHint": "Usa el operador +: print(15 + 27)",
+    "conditionalsTitle": "Condicionales",
+    "conditionalsDescription": "Toma decisiones en tu código con declaraciones if.",
+    "conditionalsTask": "Verifica si el número 10 es mayor que 5. Si es verdadero, imprime 'Sí, 10 es mayor que 5'",
+    "conditionalsHint": "Usa declaración if: if numero > 5: print('Sí, 10 es mayor que 5')",
+    "forLoopsTitle": "Bucles For",
+    "forLoopsDescription": "Repite acciones usando bucles for.",
+    "forLoopsTask": "Imprime números del 1 al 3 usando un bucle for.",
+    "forLoopsHint": "Usa range(): for i in range(1, 4): print(i)",
+    "whileLoopsTitle": "Bucles While",
+    "whileLoopsDescription": "Usa bucles while para repetición condicional.",
+    "whileLoopsTask": "Imprime números del 1 al 3 usando un bucle while.",
+    "whileLoopsHint": "Incrementa contador en cada iteración: while contador <= 3: print(contador); contador += 1",
+    "listsBasicsTitle": "Fundamentos de Listas",
+    "listsBasicsDescription": "Almacena múltiples elementos en listas.",
+    "listsBasicsTask": "Crea una lista con frutas ['manzana', 'plátano', 'naranja'] e imprime el segundo elemento.",
+    "listsBasicsHint": "Las listas usan indexación basada en cero: frutas[1] obtiene el segundo elemento",
+    "listOperationsTitle": "Operaciones de Lista",
+    "listOperationsDescription": "Agrega y modifica elementos de lista.",
+    "listOperationsTask": "Crea una lista [1, 2, 3], agrega el número 4, luego imprime toda la lista.",
+    "listOperationsHint": "Usa el método append(): numeros.append(4), luego print(numeros)",
+    "functionsBasicsTitle": "Fundamentos de Funciones",
+    "functionsBasicsDescription": "Crea código reutilizable con funciones.",
+    "functionsBasicsTask": "Define una función llamada 'saludar' que imprima '¡Hola!' y luego llámala.",
+    "functionsBasicsHint": "Usa la palabra clave def: def saludar(): print('¡Hola!'), luego llama saludar()",
+    "functionsParametersTitle": "Funciones con Parámetros",
+    "functionsParametersDescription": "Pasa datos a funciones usando parámetros.",
+    "functionsParametersTask": "Crea una función 'decir_hola' que tome un parámetro nombre e imprima '¡Hola, [nombre]!'. Llámala con 'Mundo'.",
+    "functionsParametersHint": "def decir_hola(nombre): print(f'¡Hola, {nombre}!'), luego llama decir_hola('Mundo')",
+    "dictionariesTitle": "Diccionarios",
+    "dictionariesDescription": "Almacena pares clave-valor usando diccionarios.",
+    "dictionariesTask": "Crea un diccionario con información de persona: nombre='Alicia', edad=30. Imprime el nombre.",
+    "dictionariesHint": "Usa llaves: persona = {'nombre': 'Alicia', 'edad': 30}, accede con persona['nombre']",
+    "stringMethodsTitle": "Métodos de Cadena",
+    "stringMethodsDescription": "Manipula cadenas con métodos incorporados.",
+    "stringMethodsTask": "Toma la cadena 'programación python' e imprímela en mayúsculas.",
+    "stringMethodsHint": "Usa el método upper(): texto.upper()",
+    "finalChallengeTitle": "Desafío Final",
+    "finalChallengeDescription": "¡Combina todo lo que has aprendido!",
+    "finalChallengeTask": "Crea una lista de números [1,2,3,4,5], usa un bucle for para imprimir cada número multiplicado por 2.",
+    "finalChallengeHint": "Recorre la lista: for num in numeros: print(num * 2)",
+    "starterCodeComment": "# Escribe tu código aquí\n",
+    "createVariableComment": "# Crea una variable e imprímela\n",
+    "createStringComment": "# Crea una variable de cadena\n",
+    "getUserInputComment": "# Obtén entrada del usuario y responde\n",
+    "calculateSumComment": "# Calcula e imprime la suma\n",
+    "useIfStatementComment": "# Usa una declaración if\nnumero = 10\n",
+    "useForLoopComment": "# Usa un bucle for para imprimir números\n",
+    "useWhileLoopComment": "# Usa un bucle while\ncontador = 1\n",
+    "createListComment": "# Crea una lista y accede a elementos\n",
+    "createListAddComment": "# Crea lista y agrega elemento\n",
+    "defineFunctionComment": "# Define y llama una función\n",
+    "functionParameterComment": "# Función con parámetro\n",
+    "createDictionaryComment": "# Crea y usa un diccionario\n",
+    "stringMethodsComment": "# Usa métodos de cadena\ntexto = 'programación python'\n",
+    "finalChallengeComment": "# Desafío final - combina conceptos\n",
+    "appTitle": "PyLingo",
+    "levelsProgress": "Niveles",
+    "streakLabel": "racha",
+    "levelButton": "Nivel",
+    "overallProgress": "Progreso General",
+    "selectLevel": "Seleccionar Nivel",
+    "closeButton": "×",
+    "taskLabel": "Tarea:",
+    "showHint": "Mostrar Pista",
+    "hideHint": "Ocultar Pista",
+    "pythonCodeEditor": "Editor de Código Python",
+    "resetButton": "Reiniciar",
+    "runCodeButton": "Ejecutar Código",
+    "codeEditorPlaceholder": "Escribe tu código Python aquí...",
+    "previousLevel": "Nivel Anterior",
+    "nextLevel": "Siguiente Nivel",
+    "levelOf": "Nivel {current} de {total}",
+    "evaluatingCode": "🤔 Evaluando tu código...",
+    "excellentComplete": "🎉 ¡Excelente! ¡Completaste este nivel!",
+    "notQuiteRight": "No está del todo bien. Revisemos tu solución:",
+    "yourOutput": "Tu salida:",
+    "expectedOutput": "Salida esperada:",
+    "tipLabel": "Consejo:"
+  }
+};
+
+// ─── Locale Detection ────────────────────────────────────────────────────────
+const browserLocale = (navigator.languages && navigator.languages[0]) || navigator.language || 'en-US';
+function findMatchingLocale(locale) {
+  if (TRANSLATIONS[locale]) return locale;
+  const lang = locale.split('-')[0];
+  const match = Object.keys(TRANSLATIONS).find(k => k.startsWith(lang + '-'));
+  return match || 'en-US';
+}
+const locale = findMatchingLocale(browserLocale);
+function t(key) {
+  return (TRANSLATIONS[locale] && TRANSLATIONS[locale][key]) || TRANSLATIONS['en-US'][key] || key;
+}
+
+// ─── State ───────────────────────────────────────────────────────────────────
+const state = {
+  currentLevel: 1,
+  userCode: '',
+  completedLevels: new Set(),
+  showHint: false,
+  feedback: null,
+  streak: 0,
+  showLevelSelector: false
+};
+
+// ─── Level Definitions ────────────────────────────────────────────────────────
+const levels = [
+  { id:1,  title:t('helloWorldTitle'),         description:t('helloWorldDescription'),         task:t('helloWorldTask'),         starterCode:t('starterCodeComment'),       expectedOutput:"Hello, World!",       hint:t('helloWorldHint'),         solution:"print('Hello, World!')" },
+  { id:2,  title:t('variablesNumbersTitle'),    description:t('variablesNumbersDescription'),    task:t('variablesNumbersTask'),    starterCode:t('createVariableComment'),    expectedOutput:"25",                  hint:t('variablesNumbersHint'),    solution:"age = 25\nprint(age)" },
+  { id:3,  title:t('stringVariablesTitle'),     description:t('stringVariablesDescription'),     task:t('stringVariablesTask'),     starterCode:t('createStringComment'),      expectedOutput:"Hello, Python!",      hint:t('stringVariablesHint'),     solution:"name = 'Python'\nprint(f'Hello, {name}!')" },
+  { id:4,  title:t('userInputTitle'),           description:t('userInputDescription'),           task:t('userInputTask'),           starterCode:t('getUserInputComment'),      expectedOutput:"Your favorite color is blue", hint:t('userInputHint'), solution:"color = input('What is your favorite color? ')\nprint(f'Your favorite color is {color}')" },
+  { id:5,  title:t('basicMathTitle'),           description:t('basicMathDescription'),           task:t('basicMathTask'),           starterCode:t('calculateSumComment'),      expectedOutput:"42",                  hint:t('basicMathHint'),           solution:"print(15 + 27)" },
+  { id:6,  title:t('conditionalsTitle'),        description:t('conditionalsDescription'),        task:t('conditionalsTask'),        starterCode:t('useIfStatementComment'),    expectedOutput:"Yes, 10 is greater than 5", hint:t('conditionalsHint'), solution:"number = 10\nif number > 5:\n    print('Yes, 10 is greater than 5')" },
+  { id:7,  title:t('forLoopsTitle'),            description:t('forLoopsDescription'),            task:t('forLoopsTask'),            starterCode:t('useForLoopComment'),        expectedOutput:"1\n2\n3",             hint:t('forLoopsHint'),            solution:"for i in range(1, 4):\n    print(i)" },
+  { id:8,  title:t('whileLoopsTitle'),          description:t('whileLoopsDescription'),          task:t('whileLoopsTask'),          starterCode:t('useWhileLoopComment'),      expectedOutput:"1\n2\n3",             hint:t('whileLoopsHint'),          solution:"count = 1\nwhile count <= 3:\n    print(count)\n    count += 1" },
+  { id:9,  title:t('listsBasicsTitle'),         description:t('listsBasicsDescription'),         task:t('listsBasicsTask'),         starterCode:t('createListComment'),        expectedOutput:"banana",              hint:t('listsBasicsHint'),         solution:"fruits = ['apple', 'banana', 'orange']\nprint(fruits[1])" },
+  { id:10, title:t('listOperationsTitle'),      description:t('listOperationsDescription'),      task:t('listOperationsTask'),      starterCode:t('createListAddComment'),     expectedOutput:"[1, 2, 3, 4]",       hint:t('listOperationsHint'),      solution:"numbers = [1, 2, 3]\nnumbers.append(4)\nprint(numbers)" },
+  { id:11, title:t('functionsBasicsTitle'),     description:t('functionsBasicsDescription'),     task:t('functionsBasicsTask'),     starterCode:t('defineFunctionComment'),    expectedOutput:"Hello!",              hint:t('functionsBasicsHint'),     solution:"def greet():\n    print('Hello!')\n\ngreet()" },
+  { id:12, title:t('functionsParametersTitle'), description:t('functionsParametersDescription'), task:t('functionsParametersTask'), starterCode:t('functionParameterComment'), expectedOutput:"Hello, World!",       hint:t('functionsParametersHint'), solution:"def say_hello(name):\n    print(f'Hello, {name}!')\n\nsay_hello('World')" },
+  { id:13, title:t('dictionariesTitle'),        description:t('dictionariesDescription'),        task:t('dictionariesTask'),        starterCode:t('createDictionaryComment'),  expectedOutput:"Alice",               hint:t('dictionariesHint'),        solution:"person = {'name': 'Alice', 'age': 30}\nprint(person['name'])" },
+  { id:14, title:t('stringMethodsTitle'),       description:t('stringMethodsDescription'),       task:t('stringMethodsTask'),       starterCode:t('stringMethodsComment'),     expectedOutput:"PYTHON PROGRAMMING",  hint:t('stringMethodsHint'),       solution:"text = 'python programming'\nprint(text.upper())" },
+  { id:15, title:t('finalChallengeTitle'),      description:t('finalChallengeDescription'),      task:t('finalChallengeTask'),      starterCode:t('finalChallengeComment'),    expectedOutput:"2\n4\n6\n8\n10",     hint:t('finalChallengeHint'),      solution:"numbers = [1, 2, 3, 4, 5]\nfor num in numbers:\n    print(num * 2)" }
+];
+
+// ─── Code Execution Simulation ────────────────────────────────────────────────
+function executeCode(code) {
+  try {
+    const printRegex = /print\((.*?)\)/g;
+    const matches = [];
+    let match;
+    while ((match = printRegex.exec(code)) !== null) {
+      let value = match[1].trim();
+      if ((value.startsWith("'") && value.endsWith("'")) || (value.startsWith('"') && value.endsWith('"'))) {
+        matches.push(value.slice(1, -1));
+      } else if (value.match(/^\d+$/)) {
+        matches.push(value);
+      } else if (value.includes('f\'') || value.includes('f"')) {
+        if (code.includes("name = 'Python'") || code.includes('name = "Python"')) {
+          matches.push('Hello, Python!');
+        }
+        if (code.includes('color = input(')) {
+          matches.push('Your favorite color is blue');
+        }
+        if (code.includes("say_hello('World')") || code.includes('say_hello("World")')) {
+          matches.push('Hello, World!');
+        }
+      } else if (value.includes('+')) {
+        try { matches.push(String(eval(value))); } catch { matches.push(value); }
+      } else if (code.includes('fruits[1]')) {
+        matches.push('banana');
+      } else if (code.includes('[1, 2, 3, 4]')) {
+        matches.push('[1, 2, 3, 4]');
+      } else if (code.includes("person['name']") || code.includes('person["name"]')) {
+        matches.push('Alice');
+      } else if (code.includes('.upper()')) {
+        matches.push('PYTHON PROGRAMMING');
+      } else {
+        if (code.includes('age = 25')) matches.push('25');
+        if (code.includes('Hello!')) matches.push('Hello!');
+        if (code.includes('Hello, World!')) matches.push('Hello, World!');
+        if (code.includes('Yes, 10 is greater than 5')) matches.push('Yes, 10 is greater than 5');
+      }
+    }
+    if (code.includes('for i in range(1, 4)')) { matches.push('1', '2', '3'); }
+    if (code.includes('while count <= 3')) { matches.push('1', '2', '3'); }
+    if (code.includes('for num in numbers:') && code.includes('print(num * 2)')) { matches.push('2', '4', '6', '8', '10'); }
+    return matches.join('\n');
+  } catch (e) {
+    return "Error: " + e.message;
+  }
+}
+
+// ─── AI Evaluation ───────────────────────────────────────────────────────────
+async function evaluateWithClaude(level, userCode) {
+  const prompt = `You are evaluating Python code submissions for a learning platform. Compare the user's code with the expected solution to determine if they are functionally equivalent.
+
+Task: ${level.task}
+Expected Output: ${level.expectedOutput}
+
+User's Code:
+${userCode}
+
+Expected Solution:
+${level.solution}
+
+Evaluate if the user's code will produce the same output as the expected solution. Consider:
+1. Does the user's code accomplish the same task?
+2. Will it produce the exact same output?
+3. Are there any syntax errors?
+4. Does it follow reasonable Python practices?
+
+Please respond in ${locale} language.
+
+Respond ONLY with a valid JSON object in this exact format:
+{
+  "isCorrect": true/false,
+  "explanation": "Brief explanation of why the code is correct or incorrect",
+  "feedback": "Constructive feedback for the learner",
+  "outputMatches": true/false
+}
+
+DO NOT OUTPUT ANYTHING OTHER THAN VALID JSON.`;
+
+  const response = await fetch("https://api.anthropic.com/v1/messages", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 1000,
+      messages: [{ role: "user", content: prompt }]
+    })
+  });
+  const data = await response.json();
+  const text = data.content.map(i => i.text || '').join('');
+  const clean = text.replace(/```json|```/g, '').trim();
+  return JSON.parse(clean);
+}
+
+// ─── Render Helpers ───────────────────────────────────────────────────────────
+function icon(id, cls='w-5 h-5') {
+  return `<svg class="${cls}" aria-hidden="true"><use href="#icon-${id}"/></svg>`;
+}
+
+function renderFeedback() {
+  const fb = state.feedback;
+  if (!fb) return '';
+  const colorMap = { success: 'bg-green-50 border-green-200', loading: 'bg-blue-50 border-blue-200', error: 'bg-red-50 border-red-200' };
+  const textMap  = { success: 'text-green-800', loading: 'text-blue-800', error: 'text-red-800' };
+  return `
+    <div class="p-4 rounded-lg mb-6 border ${colorMap[fb.type]}">
+      <p class="font-medium mb-2 ${textMap[fb.type]}">${fb.message}</p>
+      ${fb.explanation ? `<p class="text-sm text-gray-700 mb-2">${fb.explanation}</p>` : ''}
+      ${fb.output     ? `<p class="text-sm text-gray-600 mb-1">${t('yourOutput')}</p><pre class="bg-gray-100 p-2 rounded text-sm font-mono mb-2">${fb.output}</pre>` : ''}
+      ${fb.expected   ? `<p class="text-sm text-gray-600 mb-1">${t('expectedOutput')}</p><pre class="bg-gray-100 p-2 rounded text-sm font-mono mb-2">${fb.expected}</pre>` : ''}
+      ${fb.hint && fb.type === 'error' ? `<div class="mt-3 p-3 bg-blue-50 rounded"><p class="text-sm text-blue-800"><strong>${t('tipLabel')}</strong> ${fb.hint}</p></div>` : ''}
+    </div>`;
+}
+
+function renderLevelModal() {
+  if (!state.showLevelSelector) return '';
+  const maxUnlocked = Math.max(1, state.completedLevels.size > 0 ? Math.max(...state.completedLevels) + 1 : 1);
+  const cards = levels.map(level => {
+    const isCompleted = state.completedLevels.has(level.id);
+    const isLocked    = level.id > maxUnlocked;
+    const isCurrent   = level.id === state.currentLevel;
+    const borderCls   = isCurrent   ? 'border-blue-500 bg-blue-50'
+                      : isCompleted ? 'border-green-500 bg-green-50 hover:bg-green-100'
+                      : isLocked    ? 'border-gray-300 bg-gray-100 opacity-50 cursor-not-allowed'
+                      :               'border-gray-300 bg-white hover:border-blue-300 hover:bg-blue-50';
+    const badge = isCompleted ? icon('check-circle','w-5 h-5 text-green-600')
+                : isLocked    ? icon('lock','w-5 h-5 text-gray-400') : '';
+    return `
+      <button data-levelid="${level.id}" ${isLocked ? 'disabled' : ''} class="level-card p-4 rounded-lg border-2 text-left transition-all ${borderCls}">
+        <div class="flex items-center justify-between mb-2">
+          <span class="font-bold text-sm text-gray-600">${t('levelButton')} ${level.id}</span>
+          ${badge}
+        </div>
+        <h3 class="font-semibold text-gray-800 mb-1">${level.title}</h3>
+        <p class="text-xs text-gray-600 line-clamp-2">${level.description}</p>
+      </button>`;
+  }).join('');
+  return `
+    <div id="level-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div class="bg-white rounded-xl max-w-4xl w-full max-h-[80vh] overflow-y-auto">
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">${t('selectLevel')}</h2>
+            <button id="close-modal" class="text-gray-500 hover:text-gray-700 text-2xl leading-none">${t('closeButton')}</button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">${cards}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function render() {
+  const level = levels.find(l => l.id === state.currentLevel);
+  const progressPct = (state.completedLevels.size / levels.length) * 100;
+  const isCompleted = state.completedLevels.has(state.currentLevel);
+  const maxUnlocked = Math.max(1, state.completedLevels.size > 0 ? Math.max(...state.completedLevels) + 1 : 1);
+  const canNext = isCompleted && state.currentLevel < levels.length;
+  const canPrev = state.currentLevel > 1;
+
+  document.getElementById('app').innerHTML = `
+    <!-- Header -->
+    <header class="bg-white shadow-lg border-b-2 border-blue-500">
+      <div class="max-w-7xl mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <h1 class="text-3xl font-bold text-blue-600">${t('appTitle')}</h1>
+            <div class="hidden md:flex items-center space-x-2 text-gray-600">
+              ${icon('trophy','w-5 h-5')}
+              <span class="font-medium">${state.completedLevels.size}/${levels.length} ${t('levelsProgress')}</span>
+            </div>
+          </div>
+          <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2 bg-orange-100 px-3 py-1 rounded-full">
+              ${icon('flame','w-4 h-4 text-orange-500')}
+              <span class="font-bold text-orange-700">${state.streak}</span>
+              <span class="text-orange-600 text-sm">${t('streakLabel')}</span>
+            </div>
+            <button id="btn-level-selector" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+              ${t('levelButton')} ${state.currentLevel}
+            </button>
+          </div>
+        </div>
+        <div class="mt-4">
+          <div class="flex justify-between text-sm text-gray-600 mb-1">
+            <span>${t('overallProgress')}</span>
+            <span>${Math.round(progressPct)}%</span>
+          </div>
+          <div class="w-full bg-gray-200 rounded-full h-2">
+            <div class="bg-blue-600 h-2 rounded-full transition-all duration-500" style="width:${progressPct}%"></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    ${renderLevelModal()}
+
+    <!-- Main -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+        <!-- Left: Instructions -->
+        <div class="bg-white rounded-xl shadow-lg p-6">
+          <div class="mb-6">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="text-2xl font-bold text-gray-800">${t('levelButton')} ${state.currentLevel}: ${level.title}</h2>
+              ${isCompleted ? icon('check-circle','w-6 h-6 text-green-600') : ''}
+            </div>
+            <p class="text-gray-600 mb-4">${level.description}</p>
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg">
+              <h3 class="font-semibold text-blue-800 mb-2">${t('taskLabel')}</h3>
+              <p class="text-blue-700">${level.task}</p>
+            </div>
+          </div>
+
+          <!-- Hint -->
+          <div class="mb-6">
+            <button id="btn-hint" class="flex items-center space-x-2 text-yellow-600 hover:text-yellow-700 transition-colors">
+              ${icon('lightbulb','w-5 h-5')}
+              <span class="font-medium">${state.showHint ? t('hideHint') : t('showHint')}</span>
+            </button>
+            ${state.showHint ? `<div class="mt-3 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg"><p class="text-yellow-800">${level.hint}</p></div>` : ''}
+          </div>
+
+          ${renderFeedback()}
+        </div>
+
+        <!-- Right: Code Editor -->
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div class="bg-gray-800 text-white p-4 flex items-center justify-between">
+            <h3 class="font-semibold">${t('pythonCodeEditor')}</h3>
+            <div class="flex items-center space-x-2">
+              <button id="btn-reset" class="flex items-center space-x-1 bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded transition-colors text-sm">
+                ${icon('rotate-ccw','w-4 h-4')} <span>${t('resetButton')}</span>
+              </button>
+              <button id="btn-run" class="flex items-center space-x-1 bg-green-600 hover:bg-green-500 px-3 py-1 rounded transition-colors text-sm">
+                ${icon('play','w-4 h-4')} <span>${t('runCodeButton')}</span>
+              </button>
+            </div>
+          </div>
+          <textarea id="code-editor" placeholder="${t('codeEditorPlaceholder')}" spellcheck="false">${escapeHtml(state.userCode)}</textarea>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="mt-8 flex justify-between items-center">
+        <button id="btn-prev" ${canPrev ? '' : 'disabled'} class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+          ${t('previousLevel')}
+        </button>
+        <p class="text-gray-600">${t('levelOf').replace('{current}', state.currentLevel).replace('{total}', levels.length)}</p>
+        <button id="btn-next" ${canNext ? '' : 'disabled'} class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
+          ${t('nextLevel')}
+        </button>
+      </div>
+    </main>`;
+
+  attachEvents();
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ─── Event Attachment ─────────────────────────────────────────────────────────
+function attachEvents() {
+  // Level selector toggle
+  document.getElementById('btn-level-selector').addEventListener('click', () => {
+    state.showLevelSelector = !state.showLevelSelector;
+    render();
+  });
+
+  // Close modal
+  const closeBtn = document.getElementById('close-modal');
+  if (closeBtn) closeBtn.addEventListener('click', () => { state.showLevelSelector = false; render(); });
+
+  // Level cards
+  document.querySelectorAll('.level-card').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = parseInt(btn.dataset.levelid);
+      const maxUnlocked = Math.max(1, state.completedLevels.size > 0 ? Math.max(...state.completedLevels) + 1 : 1);
+      if (id <= maxUnlocked) {
+        state.currentLevel = id;
+        state.userCode = levels.find(l => l.id === id).starterCode;
+        state.showHint = false;
+        state.feedback = null;
+        state.showLevelSelector = false;
+        render();
+      }
+    });
+  });
+
+  // Hint toggle
+  document.getElementById('btn-hint').addEventListener('click', () => {
+    state.showHint = !state.showHint;
+    render();
+  });
+
+  // Code editor sync
+  document.getElementById('code-editor').addEventListener('input', e => {
+    state.userCode = e.target.value;
+  });
+
+  // Reset
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    const level = levels.find(l => l.id === state.currentLevel);
+    state.userCode = level.starterCode;
+    state.feedback = null;
+    state.showHint = false;
+    render();
+  });
+
+  // Run / Submit
+  document.getElementById('btn-run').addEventListener('click', handleSubmit);
+
+  // Prev/Next
+  document.getElementById('btn-prev').addEventListener('click', () => {
+    if (state.currentLevel > 1) changeLevel(state.currentLevel - 1);
+  });
+  document.getElementById('btn-next').addEventListener('click', () => {
+    if (state.completedLevels.has(state.currentLevel) && state.currentLevel < levels.length) changeLevel(state.currentLevel + 1);
+  });
+
+  // Close modal on backdrop click
+  const modal = document.getElementById('level-modal');
+  if (modal) modal.addEventListener('click', e => { if (e.target === modal) { state.showLevelSelector = false; render(); } });
+}
+
+function changeLevel(id) {
+  state.currentLevel = id;
+  state.userCode = levels.find(l => l.id === id).starterCode;
+  state.showHint = false;
+  state.feedback = null;
+  render();
+}
+
+async function handleSubmit() {
+  const level = levels.find(l => l.id === state.currentLevel);
+  // Read latest code from textarea directly (state may not have synced on fast clicks)
+  const codeEl = document.getElementById('code-editor');
+  if (codeEl) state.userCode = codeEl.value;
+
+  state.feedback = { type: 'loading', message: t('evaluatingCode') };
+  render();
+
+  try {
+    const evaluation = await evaluateWithClaude(level, state.userCode);
+    if (evaluation.isCorrect) {
+      state.completedLevels.add(state.currentLevel);
+      state.streak++;
+      state.feedback = { type: 'success', message: t('excellentComplete'), explanation: evaluation.feedback };
+    } else {
+      state.streak = 0;
+      state.feedback = { type: 'error', message: t('notQuiteRight'), explanation: evaluation.feedback, hint: evaluation.explanation, expected: level.expectedOutput };
+    }
+  } catch (err) {
+    // Fallback: simple simulation
+    const output = executeCode(state.userCode);
+    const isCorrect = output.trim() === level.expectedOutput.trim();
+    if (isCorrect) {
+      state.completedLevels.add(state.currentLevel);
+      state.streak++;
+      state.feedback = { type: 'success', message: t('excellentComplete'), output };
+    } else {
+      state.streak = 0;
+      state.feedback = { type: 'error', message: t('notQuiteRight'), output, expected: level.expectedOutput, hint: level.hint };
+    }
+  }
+  render();
+}
+
+// ─── Boot ─────────────────────────────────────────────────────────────────────
+state.userCode = levels[0].starterCode;
+render();
+</script>
+
+<div id="app"></div>
+
 </body>
 </html>
